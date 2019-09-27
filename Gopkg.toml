@@ -24,7 +24,8 @@
 #   go-tests = true
 #   unused-packages = true
 
-
+[[constraint]]
+  name = "github.com/j-farkas/stsapi"
 [prune]
   go-tests = true
   unused-packages = true
