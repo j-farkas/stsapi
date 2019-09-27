@@ -8,7 +8,7 @@ import (
   "encoding/json"
   "fmt"
   "strconv"
-	_ "github.com/go-sql-driver/mysql"
+	_"github.com/go-sql-driver/mysql"
 )
 
 type Enemy struct {
@@ -75,10 +75,12 @@ func GetReward(response http.ResponseWriter, request *http.Request){
   	if err != nil {
   		panic(err.Error())
   	cards = append(cards, card)
+    }
   }
 	json.NewEncoder(response).Encode(cards)
 
 }
+
 
 func main() {
 
