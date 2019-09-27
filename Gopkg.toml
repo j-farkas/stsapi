@@ -24,7 +24,7 @@
 #   go-tests = true
 #   unused-packages = true
 
-
+required = ["github.com/j-farkas/stsapi"]
 [prune]
   go-tests = true
   unused-packages = true
