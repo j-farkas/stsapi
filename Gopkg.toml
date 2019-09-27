@@ -24,6 +24,10 @@
 #   go-tests = true
 #   unused-packages = true
 
+[prune]
+  go-tests = true
+  unused-packages = true
+
 required = ["github.com/j-farkas/stsapi"]
 [metadata.heroku]
   root-package = "github.com/j-farkas/stsapi"
