@@ -24,13 +24,16 @@
 #   go-tests = true
 #   unused-packages = true
 
-[prune]
-  go-tests = true
-  unused-packages = true
-
-required = ["github.com/j-farkas/stsapi"]
 [metadata.heroku]
   root-package = "github.com/j-farkas/stsapi"
+
+[[constraint]]
+   name = "github.com/gorilla/mux"
+
+[[constraint]]
+  name = "github.com/go-sql-driver/mysql"
+
+
 [prune]
   go-tests = true
   unused-packages = true
