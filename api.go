@@ -46,13 +46,11 @@ func GetEnemy(response http.ResponseWriter, request *http.Request){
 
   for results.Next() {
   	var enemy Enemy
-  	// for each row, scan the result into our tag composite object
   	err = results.Scan(&enemy.ID, &enemy.Attacks, &enemy.RewardClass, &enemy.HP)
   	if err != nil {
-  		panic(err.Error()) // proper error handling instead of panic in your app
+  		panic(err.Error())
   	}
 
-  	// and then print out the tag's Name attribute
   	enemies = append(enemies, enemy)
   }
 	json.NewEncoder(response).Encode(enemies)
@@ -73,13 +71,9 @@ func GetReward(response http.ResponseWriter, request *http.Request){
 
   for results.Next() {
   	var card Card
-  	// for each row, scan the result into our tag composite object
   	err = results.Scan(&card.ID, &card.Name, &card.Cost, &card.Type, &card.Effects, &card.Color,&card.Upgraded,&card.CardText,&card.Rarity)
   	if err != nil {
-  		panic(err.Error()) // proper error handling instead of panic in your app
-  	}
-
-  	// and then print out the tag's Name attribute
+  		panic(err.Error())
   	cards = append(cards, card)
   }
 	json.NewEncoder(response).Encode(cards)
@@ -89,25 +83,8 @@ func GetReward(response http.ResponseWriter, request *http.Request){
 func main() {
 
   fmt.Println("Starting the application...")
-	//ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
   router := mux.NewRouter()
 	router.HandleFunc("/Enemies", GetEnemy).Methods("GET")
   router.HandleFunc("/Rewards", GetReward).Methods("GET")
   http.ListenAndServe(":12345", router)
-	// // Execute the query
-	// results, err := db.Query("SELECT id, name FROM Card")
-	// if err != nil {
-	// 	panic(err.Error()) // proper error handling instead of panic in your app
-	// }
-  //
-	// for results.Next() {
-	// 	var tag Tag
-	// 	// for each row, scan the result into our tag composite object
-	// 	err = results.Scan(&tag.ID, &tag.Name)
-	// 	if err != nil {
-	// 		panic(err.Error()) // proper error handling instead of panic in your app
-	// 	}
-	// 	// and then print out the tag's Name attribute
-	// 	log.Printf(tag.Name)
-	// }
 }
