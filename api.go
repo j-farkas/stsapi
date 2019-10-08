@@ -27,7 +27,7 @@ type Card struct{
   Effects     string   `json:"effects"`
   Color       string   `json:"color"`
   Upgraded    int      `json:"upgraded"`
-  CardText    string   `json:"cardtext"`
+  CardText    string   `json:"cardText"`
   Rarity      int      `json:"rarity"`
 }
 
@@ -79,11 +79,7 @@ func GetReward(response http.ResponseWriter, request *http.Request){
     cards = append(cards, card)
 
   }
-  var cardsout []Card
-  cardsout = append(cardsout, cards[rand.Intn(len(cards))])
-  cardsout = append(cardsout, cards[rand.Intn(len(cards))])
-  cardsout = append(cardsout, cards[rand.Intn(len(cards))])
-	json.NewEncoder(response).Encode(cardsout)
+	json.NewEncoder(response).Encode(cards)
 
 }
 
@@ -92,7 +88,7 @@ func main() {
 
   fmt.Println("Starting the application...")
   router := mux.NewRouter()
-	router.HandleFunc("/Enemies", GetEnemy).Methods("GET")
-  router.HandleFunc("/Rewards", GetReward).Methods("GET")
+	router.HandleFunc("/Enemies", GetEnemy).Methods("POST")
+  router.HandleFunc("/Rewards", GetReward).Methods("POST")
   http.ListenAndServe(":12345", router)
 }
