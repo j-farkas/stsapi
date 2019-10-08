@@ -41,7 +41,7 @@ func GetEnemy(response http.ResponseWriter, request *http.Request){
 	err := json.NewDecoder(request.Body).Decode(&user)
   fmt.Println(user.Level)
   db, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:8889)/stsclone")
-  results, err := db.Query("SELECT * FROM Enemy where RewardClass <=" + strconv.Itoa(user.Level))
+  results, err := db.Query("SELECT * FROM Enemy where RewardClass =" + strconv.Itoa(user.Level))
 	defer db.Close()
 
   for results.Next() {
@@ -71,7 +71,8 @@ func GetReward(response http.ResponseWriter, request *http.Request){
 
   for results.Next() {
   	var card Card
-  	err = results.Scan(&card.ID, &card.Name, &card.Cost, &card.Type, &card.Effects, &card.Color,&card.Upgraded,&card.CardText,&card.Rarity)
+  	err = results.Scan(&card.ID, &card.Name, &card.Cost, &card.Type, &card.Effects, &card.Color, &card.Upgraded, &card.CardText, &card.Rarity)
+    fmt.Println(card.name)
   	if err != nil {
   		panic(err.Error())
   	cards = append(cards, card)
