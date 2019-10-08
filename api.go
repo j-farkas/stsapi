@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+  "math/rand"
 	// "log"
   "github.com/gorilla/mux"
   "net/http"
@@ -13,7 +14,7 @@ import (
 
 type Enemy struct {
 	ID          int      `json:"id"`
-	Attacks     string `json:"attacks"`
+	Attacks     string   `json:"attacks"`
   RewardClass int      `json:"rewardclass"`
   HP          int      `json:"hp"`
 }
@@ -53,7 +54,7 @@ func GetEnemy(response http.ResponseWriter, request *http.Request){
 
   	enemies = append(enemies, enemy)
   }
-	json.NewEncoder(response).Encode(enemies)
+	json.NewEncoder(response).Encode(enemies[rand.Intn(len(enemies))])
 
 }
 
@@ -76,8 +77,13 @@ func GetReward(response http.ResponseWriter, request *http.Request){
   		panic(err.Error())
     }
     cards = append(cards, card)
+
   }
-	json.NewEncoder(response).Encode(cards)
+  var cardsout []Card
+  cardsout = append(cardsout, cards[rand.Intn(len(cards))])
+  cardsout = append(cardsout, cards[rand.Intn(len(cards))])
+  cardsout = append(cardsout, cards[rand.Intn(len(cards))])
+	json.NewEncoder(response).Encode(cardsout)
 
 }
 
