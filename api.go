@@ -23,7 +23,7 @@ type Card struct{
   Name        string   `json:"name"`
   Cost        int      `json:"cost"`
   Type        string   `json:"type"`
-  Effects     string   `json:"type"`
+  Effects     string   `json:"effects"`
   Color       string   `json:"color"`
   Upgraded    int      `json:"upgraded"`
   CardText    string   `json:"cardtext"`
@@ -72,11 +72,10 @@ func GetReward(response http.ResponseWriter, request *http.Request){
   for results.Next() {
   	var card Card
   	err = results.Scan(&card.ID, &card.Name, &card.Cost, &card.Type, &card.Effects, &card.Color, &card.Upgraded, &card.CardText, &card.Rarity)
-    fmt.Println(card.name)
   	if err != nil {
   		panic(err.Error())
-  	cards = append(cards, card)
     }
+    cards = append(cards, card)
   }
 	json.NewEncoder(response).Encode(cards)
 
